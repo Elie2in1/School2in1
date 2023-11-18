@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace school.DAL.Entidades
 {
-    public class Estudiante : Persona
+    public class Empleado : Persona
     {
-        public int Id { get; set; }
-        public DateTime? EnrollmentDate { get; set; }
-        
+        public DateTime? HireDate { get; set; }
     }
 }
