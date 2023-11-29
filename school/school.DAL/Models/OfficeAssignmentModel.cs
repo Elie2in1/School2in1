@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace school.DAL.Entidades
+namespace school.DAL.Models
 {
-    public class Oficinista : Personal
+    public class OfficeAssignmentModel
     {
-        public int? InstructorID { get; set; }
+        public int InstructorId { get; set; }
         public string? Location { get; set; }
-        public DateTime? Timestamp { get; set; }
+        public byte[]? Timestamp { get; set; }
+
     }
 }

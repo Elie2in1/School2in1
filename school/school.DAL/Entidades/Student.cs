@@ -1,4 +1,4 @@
-﻿using school.DAL.Entidades.Base;
+﻿using school.DAL.CORE;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace school.DAL.Entidades
 {
-    public class Estudiante : Persona
+    public class Student : Person
     {
         public int Id { get; set; }
         public DateTime? EnrollmentDate { get; set; }
-        
+
     }
 }

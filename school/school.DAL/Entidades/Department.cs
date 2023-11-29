@@ -1,4 +1,4 @@
-﻿using school.DAL.Entidades.Base;
+﻿using school.DAL.CORE;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace school.DAL.Entidades
 {
-    public class Departamento : BaseEntidad
+    public class Department : BaseEntity
     {
-        public int DepartmentID { get; set; }
+        public int DepartmentId { get; set; }
         public string? Name { get; set; }
         public decimal Budget { get; set; }
         public DateTime StartDate { get; set; }

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace school.DAL.Entidades
+namespace school.DAL.Models
 {
-    public class CursoOnline : Curso
+    public class OnlineCourseModel
     {
+        public int CourseId { get; set; }
         public string? URL { get; set; }
     }
 }

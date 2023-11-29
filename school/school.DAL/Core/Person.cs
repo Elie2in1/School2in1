@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace school.DAL.Entidades.Base
+namespace school.DAL.CORE
 {
-    public abstract class Persona : BaseEntidad
+    public abstract class Person : BaseEntity
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }

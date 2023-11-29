@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace school.DAL.Entidades.Base
+namespace school.DAL.CORE
 {
-    public abstract class BaseEntidad
- {
+    public abstract class BaseEntity
+    {
         public DateTime CreationDate { get; set; }
         public DateTime? ModifyDate { get; set; }
         public int CreationUser { get; set; }
