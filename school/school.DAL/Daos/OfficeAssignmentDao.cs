@@ -125,9 +125,6 @@ namespace school.DAL.Daos
                 officeAssignmentToUpdate.InstructorId = officeAssignment.InstructorId;
                 officeAssignmentToUpdate.Location = officeAssignment.Location;
               
-                officeAssignmentToUpdate.Timestamp = officeAssignment.Timestamp;
-
-
                 this.schoolDb.OfficeAssignments.Update(officeAssignmentToUpdate);
                 this.schoolDb.SaveChanges();
             }
