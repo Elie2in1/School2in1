@@ -10,7 +10,7 @@ namespace school.DAL.Entidades
     public class OnlineCourse
     {
         [Key]
-        public int CourseId { get; set; }
+        public int CourseID { get; set; }
         public string? URL { get; set; }
     }
 }

@@ -64,7 +64,7 @@ namespace school.DAL.Daos
             }
             catch (Exception ex)
             {
-                throw new StudentDaoException(ex.Message);
+                throw new StudentGradeDaoException(ex.Message);
             }
             return studentGrades;
         }
@@ -99,7 +99,7 @@ namespace school.DAL.Daos
             try
             {
                 if (studentGrade is null)
-                    throw new StudentDaoException("la clase debe de ser instaciada.");
+                    throw new StudentGradeDaoException("la clase debe de ser instaciada.");
 
 
                 this.schoolDb.StudentGrades.Add(studentGrade);
@@ -110,24 +110,38 @@ namespace school.DAL.Daos
                 throw new StudentGradeDaoException(ex.Message);
             }
         }
-        /*
+        /* public void SaveStudentGrade(StudentGrade studentGrades)
+         {
+             try
+             {
+                 if (studentGrade is null)
+                     throw new StudentGradeDaoException("la clase debe de ser instaciada.");
+
+
+                 this.schoolDb.StudentGrades.Add(studentGrades);
+                 this.schoolDb.SaveChanges();
+             }
+             catch (Exception ex)
+             {
+                 throw new StudentGradeDaoException(ex.Message);
+             }
+         }
+         */
         public void UpdateStudentGrade(StudentGrade studentGrade)
         {
             try
             {
-                StudentGrade? studentGradeToUpdate = this.schoolDb.StudentGrades.Find(studentGrade.Id);
+                StudentGrade? studentGradeToUpdate = this.schoolDb.StudentGrades.Find(studentGrade.StudentId);
 
                 if (studentGradeToUpdate is null)
                     throw new StudentGradeDaoException("El estudiante no se encuentra registrado.");
 
 
-                studentGradeToUpdate.ModifyDate = studentGrade.ModifyDate;
-                studentGradeToUpdate.UserMod = studentGrade.UserMod;
-                studentGradeToUpdate.Id = studentGrade.Id;
-                studentGradeToUpdate.LastName = studentGrade.LastName;
-                studentGradeToUpdate.FirstName = studentGrade.FirstName;
-                studentGradeToUpdate.EnrollmentDate = studentGrade.EnrollmentDate.Value;
-
+                studentGradeToUpdate.CourseId = studentGrade.CourseId;
+                studentGradeToUpdate.EnrollmentId = studentGrade.EnrollmentId;
+                studentGradeToUpdate.StudentId = studentGrade.StudentId;
+                studentGradeToUpdate.Grade = studentGrade.Grade;
+                
 
                 this.schoolDb.StudentGrades.Update(studentGradeToUpdate);
                 this.schoolDb.SaveChanges();
@@ -137,6 +151,6 @@ namespace school.DAL.Daos
 
                 throw new StudentGradeDaoException(ex.Message);
             }
-        }*/
+        }
     }
 }

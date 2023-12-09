@@ -1,0 +1,40 @@
+﻿@model IEnumerable<school.web.Models.OnlineCourseListModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Curso Online</h1>
+
+<p>
+    <a asp-action="Create">Crear Nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Codigo del Curso
+            </th>
+            <th>
+                URL
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.URL)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id=item.CourseID }) |
+                @Html.ActionLink("Detalles", "Details", new {  id=item.CourseID }) 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

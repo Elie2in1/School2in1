@@ -29,7 +29,7 @@ namespace school.DAL.Daos
                 if (onsiteCourse is null)
                     throw new OnsiteCourseDaoException("El curso no se encuentra registrado.");
 
-                model.CourseId = onsiteCourse.CourseId;
+                model.CourseID = onsiteCourse.CourseID;
                 model.Location = string.Concat(onsiteCourse.Location, " ");
                 model.Days = string.Concat(onsiteCourse.Days, " ");
                 model.Time = onsiteCourse.Time;
@@ -53,7 +53,7 @@ namespace school.DAL.Daos
                             select new OnsiteCourseModel()
                             {
 
-                                CourseId = osc.CourseId,
+                                CourseID = osc.CourseID,
                                 Location = string.Concat(osc.Location, " "),
                                 Days = string.Concat(osc.Days, " "),
                                 Time = osc.Time,
@@ -110,34 +110,32 @@ namespace school.DAL.Daos
                 throw new OnsiteCourseDaoException(ex.Message);
             }
         }
-        /*
-        public void UpdateOfficeAssignment(OfficeAssignment officeAssignment)
+       
+        public void UpdateOnsiteCourse(OnsiteCourse onsiteCourse)
         {
             try
             {
-                OfficeAssignment? officeAssignmentToUpdate = this.schoolDb.OfficeAssignments.Find(officeAssignment.InstructorId);
+                OnsiteCourse? onsiteCourseToUpdate = this.schoolDb.OnsiteCourses.Find(onsiteCourse.CourseID);
 
-                if (officeAssignmentToUpdate is null)
-                    throw new OfficeAssignmentDaoException("El OfficeAssignment no se encuentra registrado.");
+                if (onsiteCourseToUpdate is null)
+                    throw new OnsiteCourseDaoException("El Curso Presencial no se encuentra registrado.");
 
 
-                officeAssignmentToUpdate.ModifyDate = officeAssignment.ModifyDate;
-                officeAssignmentToUpdate.UserMod = officeAssignment.UserMod;
-                officeAssignmentToUpdate.InstructorId = officeAssignment.InstructorId;
-                officeAssignmentToUpdate.Location = officeAssignment.Location;
+                onsiteCourseToUpdate.CourseID = onsiteCourse.CourseID;
+                onsiteCourseToUpdate.Days = onsiteCourse.Days;
+                onsiteCourseToUpdate.Time = onsiteCourse.Time;
+                onsiteCourseToUpdate.Location = onsiteCourse.Location;
               
-                officeAssignmentToUpdate.Timestamp = officeAssignment.Timestamp;
-
-
-                this.schoolDb.OfficeAssignments.Update(officeAssignmentToUpdate);
+               
+                this.schoolDb.OnsiteCourses.Update(onsiteCourseToUpdate);
                 this.schoolDb.SaveChanges();
             }
             catch (Exception ex)
             {
 
-                throw new OfficeAssignmentDaoException(ex.Message);
+                throw new OnsiteCourseDaoException(ex.Message);
             }
         }
-        */
+        
     }
 }

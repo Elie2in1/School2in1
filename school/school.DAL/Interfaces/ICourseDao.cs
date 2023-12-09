@@ -15,5 +15,6 @@ namespace school.DAL.Interfaces
         void RemoveCourse(Course course);
         List<CourseModel> GetCourses();
         CourseModel GetCourseById(int courseId);
+        object GetDepartments();
     }
 }

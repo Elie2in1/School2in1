@@ -29,7 +29,7 @@ namespace school.DAL.Daos
                 if (onlineCourse is null)
                     throw new OnlineCourseDaoException("El curso online no se encuentra registrado.");
 
-                model.CourseId = onlineCourse.CourseId;
+                model.CourseID = onlineCourse.CourseID;
                 model.URL = string.Concat(onlineCourse.URL, " ");
 
 
@@ -51,7 +51,7 @@ namespace school.DAL.Daos
                             select new OnlineCourseModel()
                             {
 
-                                CourseId = olc.CourseId,
+                                CourseID = olc.CourseID,
                                 URL = string.Concat(olc.URL, " "),
                             };
 
@@ -106,34 +106,30 @@ namespace school.DAL.Daos
                 throw new OnlineCourseDaoException(ex.Message);
             }
         }
-        /*
-        public void UpdateOfficeAssignment(OfficeAssignment officeAssignment)
+        
+        public void UpdateOnlineCourse(OnlineCourse onlineCourse)
         {
             try
             {
-                OfficeAssignment? officeAssignmentToUpdate = this.schoolDb.OfficeAssignments.Find(officeAssignment.InstructorId);
+                OnlineCourse? onlineCourseToUpdate = this.schoolDb.OnlineCourses.Find(onlineCourse.CourseID);
 
-                if (officeAssignmentToUpdate is null)
-                    throw new OfficeAssignmentDaoException("El OfficeAssignment no se encuentra registrado.");
-
-
-                officeAssignmentToUpdate.ModifyDate = officeAssignment.ModifyDate;
-                officeAssignmentToUpdate.UserMod = officeAssignment.UserMod;
-                officeAssignmentToUpdate.InstructorId = officeAssignment.InstructorId;
-                officeAssignmentToUpdate.Location = officeAssignment.Location;
-              
-                officeAssignmentToUpdate.Timestamp = officeAssignment.Timestamp;
+                if (onlineCourseToUpdate is null)
+                    throw new OnlineCourseDaoException("El Curso Online no se encuentra registrado.");
 
 
-                this.schoolDb.OfficeAssignments.Update(officeAssignmentToUpdate);
+                onlineCourseToUpdate.CourseID = onlineCourse.CourseID;
+                onlineCourseToUpdate.URL = onlineCourse.URL;
+
+
+                this.schoolDb.OnlineCourses.Update(onlineCourseToUpdate);
                 this.schoolDb.SaveChanges();
             }
             catch (Exception ex)
             {
 
-                throw new OfficeAssignmentDaoException(ex.Message);
+                throw new OnlineCourseDaoException(ex.Message);
             }
         }
-        */
+        
     }
 }

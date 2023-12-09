@@ -33,7 +33,7 @@ namespace school.DAL.Daos
                 model.CreationDate = department.CreationDate;
                 model.StartDate = department.StartDate;
                 model.DepartmentId = department.DepartmentId;
-                model.Name = string.Concat(department.Name, " ");
+                model.Name = department.Name;
 
 
             }
@@ -57,7 +57,7 @@ namespace school.DAL.Daos
                                 CreationDate = DE.CreationDate,
                                 StartDate = DE.StartDate,
                                 DepartmentId = DE.DepartmentId,
-                                Name = string.Concat(DE.Name, " ")
+                                Name = DE.Name,
                             };
 
                 departments = query.ToList();

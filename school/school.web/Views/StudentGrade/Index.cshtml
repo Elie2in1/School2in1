@@ -1,0 +1,52 @@
+﻿@model IEnumerable<school.web.Models.StudentGradeListModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3>Estudiante Grado</h3>
+
+<p>
+    <a asp-action="Create">Agregar Nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Codigo de Inscripcion
+            </th>
+            <th>
+                Codigo de Curso
+            </th>
+            <th>
+                Codigo de Estudiante
+            </th>
+            <th>
+                Grado
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnrollmentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grade)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id=item.StudentId }) |
+                @Html.ActionLink("Ver Detalles", "Details", new { id=item.StudentId }) 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

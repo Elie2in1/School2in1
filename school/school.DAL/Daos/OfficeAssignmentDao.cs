@@ -30,9 +30,10 @@ namespace school.DAL.Daos
                     throw new OfficeAssignmentDaoException("El OfficeAssignment no se encuentra registrado.");
 
 
-                model.Timestamp = officeAssignment.Timestamp;
+
                 model.InstructorId = officeAssignment.InstructorId;
                 model.Location = string.Concat(officeAssignment.Location, " ");
+                model.Timestamp = officeAssignment.Timestamp;
 
 
             }
@@ -56,6 +57,7 @@ namespace school.DAL.Daos
                                 InstructorId = of.InstructorId,
                                 Location = string.Concat(of.Location, " "),
                                 Timestamp = of.Timestamp
+                                
                             };
 
                 officeAssignments = query.ToList();
@@ -109,7 +111,7 @@ namespace school.DAL.Daos
                 throw new OfficeAssignmentDaoException(ex.Message);
             }
         }
-        /*
+        
         public void UpdateOfficeAssignment(OfficeAssignment officeAssignment)
         {
             try
@@ -120,11 +122,11 @@ namespace school.DAL.Daos
                     throw new OfficeAssignmentDaoException("El OfficeAssignment no se encuentra registrado.");
 
 
-                officeAssignmentToUpdate.ModifyDate = officeAssignment.ModifyDate;
-                officeAssignmentToUpdate.UserMod = officeAssignment.UserMod;
+                
                 officeAssignmentToUpdate.InstructorId = officeAssignment.InstructorId;
                 officeAssignmentToUpdate.Location = officeAssignment.Location;
-              
+                officeAssignmentToUpdate.Timestamp = officeAssignment.Timestamp;
+
                 this.schoolDb.OfficeAssignments.Update(officeAssignmentToUpdate);
                 this.schoolDb.SaveChanges();
             }
@@ -134,6 +136,6 @@ namespace school.DAL.Daos
                 throw new OfficeAssignmentDaoException(ex.Message);
             }
         }
-        */
+        
     }
 }

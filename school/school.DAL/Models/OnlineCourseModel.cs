@@ -8,7 +8,7 @@ namespace school.DAL.Models
 {
     public class OnlineCourseModel
     {
-        public int CourseId { get; set; }
+        public int CourseID { get; set; }
         public string? URL { get; set; }
     }
 }

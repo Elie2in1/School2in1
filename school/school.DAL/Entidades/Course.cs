@@ -9,9 +9,10 @@ namespace school.DAL.Entidades
 {
     public class Course : BaseEntity
     {
-        public int CourseId { get; set; }
+        public int CourseID { get; set; }
         public string? Title { get; set; }
         public int Credits { get; set; }
-        public int DepartmentId { get; set; }
+        public int DepartmentID { get; set; }
+        public virtual Department Department { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using school.DAL.Interfaces;
+using school.DAL.Entidades;
+using school.web.Models;
 
 namespace school.web.Controllers
 {
@@ -9,7 +11,7 @@ namespace school.web.Controllers
         private readonly IInstructorDao instructorDao;
         public InstructorController(IInstructorDao instructorDao)
         {
-            this.instructorDao = instructorDao;
+           this.instructorDao = instructorDao;
         }
         // GET: InstructorController
         public ActionResult Index()
@@ -22,13 +24,21 @@ namespace school.web.Controllers
                 Id = ins.Id,
                 Name = ins.Name,
             }).ToList();
-            return View();
+            return View(instructors);
         }
 
         // GET: InstructorController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var instructorModel = this.instructorDao.GetInstructorById(id);
+            InstructorListModel instructor = new InstructorListModel()
+            {
+                HireDate = instructorModel.HireDate,
+                Id = instructorModel.Id,
+                Name = instructorModel.Name,
+                CreationDate = instructorModel.CreationDate,
+            };
+            return View(instructor);
         }
 
         // GET: InstructorController/Create
@@ -40,10 +50,20 @@ namespace school.web.Controllers
         // POST: InstructorController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(InstructorViewModel instructorView)
         {
             try
             {
+                Instructor instructorToAdd = new Instructor()
+                {
+                    FirstName = instructorView.FirstName,
+                    LastName = instructorView.LastName,
+                    HireDate = instructorView.HireDate,
+                    CreationDate = DateTime.Now,
+                    CreationUser = 1
+                };
+
+                this.instructorDao.SaveInstructor(instructorToAdd);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -55,43 +75,42 @@ namespace school.web.Controllers
         // GET: InstructorController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var instructorModel = this.instructorDao.GetInstructorById(id);
+            InstructorViewModel instructorViewModel = new InstructorViewModel()
+            {
+                HireDate = instructorModel.HireDate,
+                FirstName = instructorModel.FirstName,
+                LastName = instructorModel.LastName,
+                Id = instructorModel.Id,
+            };
+            return View(instructorViewModel);
         }
 
         // POST: InstructorController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(InstructorViewModel instructorView)
         {
             try
             {
+                Instructor instructorToUpdate = new Instructor
+                {
+                    Id = instructorView.Id,
+                    FirstName = instructorView.FirstName,
+                    LastName = instructorView.LastName,
+                    HireDate = instructorView.HireDate,
+                    ModifyDate = DateTime.Now,
+                    UserMod = 1
+                };
+
+                this.instructorDao.UpdateInstructor(instructorToUpdate);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
                 return View();
             }
-        }
-
-        // GET: InstructorController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: InstructorController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+        
         }
     }
 }

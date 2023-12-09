@@ -1,4 +1,5 @@
-﻿using school.DAL.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using school.DAL.Context;
 using school.DAL.Entidades;
 using school.DAL.Exceptions;
 using school.DAL.Interfaces;
@@ -19,21 +20,25 @@ namespace school.DAL.Daos
         {
             this.schoolDb = schoolDb;
         }
-        public CourseModel GetCourseById(int courseId)
+        public IEnumerable<Department> GetDepartments()
+        {
+            return schoolDb.Departments.ToList(); // Suponiendo que tienes una entidad Department mapeada en tu DbContext
+        }
+        public CourseModel GetCourseById(int courseID)
         {
             CourseModel model = new CourseModel();
             try
             {
-                Course? course = schoolDb.Courses.Find(courseId);
+                Course? course = schoolDb.Courses.Find(courseID);
 
                 if (course is null)
                     throw new CourseDaoException("El curso no se encuentra registrado.");
 
 
-                model.CreationDate = course.CreationDate;
-                model.CreationDate = course.CreationDate;
-                model.CourseId = course.CourseId;
-                model.Name = string.Concat(course.Title, " ");
+                model.Credits = course.Credits;
+                model.DepartmentID = course.DepartmentID;
+                model.CourseID = course.CourseID;
+                model.Title = string.Concat(course.Title, " ");
 
 
             }
@@ -54,10 +59,11 @@ namespace school.DAL.Daos
                             where cou.Deleted == false
                             select new CourseModel()
                             {
-                                CreationDate = cou.CreationDate,
-                                EnrollmentDate = cou.CreationDate,
-                                CourseId = cou.CourseId,
-                                Name = string.Concat(cou.Title, " ")
+                               
+                                CourseID = cou.CourseID,
+                                Title = string.Concat(cou.Title, " "),
+                                DepartmentID = cou.DepartmentID,
+                                Credits = cou.Credits,
                             };
 
                 courses = query.ToList();
@@ -74,7 +80,7 @@ namespace school.DAL.Daos
         {
             try
             {
-                Course? courseToRemove = this.schoolDb.Courses.Find(course.CourseId);
+                Course? courseToRemove = this.schoolDb.Courses.Find(course.CourseID);
 
                 if (courseToRemove is null)
                     throw new CourseDaoException("El Curso no se encuentra registrado.");
@@ -116,18 +122,16 @@ namespace school.DAL.Daos
         {
             try
             {
-                Course? courseToUpdate = this.schoolDb.Courses.Find(course.CourseId);
+                Course? courseToUpdate = this.schoolDb.Courses.Find(course.CourseID);
 
                 if (courseToUpdate is null)
                     throw new CourseDaoException("El curso no se encuentra registrado.");
 
 
-                courseToUpdate.ModifyDate = course.ModifyDate;
-                courseToUpdate.UserMod = course.UserMod;
-                courseToUpdate.CourseId = course.CourseId;
+                courseToUpdate.DepartmentID = course.DepartmentID;
+                courseToUpdate.Credits = course.Credits;
+                courseToUpdate.CourseID = course.CourseID;
                 courseToUpdate.Title = course.Title;
-                courseToUpdate.Title = course.Title;
-                courseToUpdate.CreationDate = course.CreationDate;
 
 
                 this.schoolDb.Courses.Update(courseToUpdate);
@@ -138,6 +142,11 @@ namespace school.DAL.Daos
 
                 throw new CourseDaoException(ex.Message);
             }
+        }
+
+        object ICourseDao.GetDepartments()
+        {
+            throw new NotImplementedException();
         }
     }
 }

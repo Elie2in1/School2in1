@@ -29,11 +29,12 @@ namespace school.DAL.DAOS
                 if (instructor is null)
                     throw new InstructorDaoException("El instructor no se encuentra registrado.");
 
-
+                model.FirstName = instructor.FirstName;
+                model.LastName = instructor.LastName;
                 model.HireDate = instructor.HireDate.Value;
                 model.HireDate = instructor.HireDate.Value;
                 model.Id = instructor.Id;
-                model.Name = string.Concat(instructor.FirstName, " ", instructor.LastName);
+                
 
 
             }
@@ -57,7 +58,8 @@ namespace school.DAL.DAOS
                                 CreationDate = ins.HireDate.Value,
                                 HireDate = ins.HireDate.Value,
                                 Id = ins.Id,
-                                Name = string.Concat(ins.FirstName, " ", ins.LastName)
+                                FirstName = ins.FirstName,
+                                LastName = ins.LastName,
                             };
 
                 instructors = query.ToList();
